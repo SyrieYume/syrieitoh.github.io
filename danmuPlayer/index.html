@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/hls.min.js"></script>
+</head>
+<body>
+    <div id="videoContainer">
+        <video controls>
+        </video>
+        <canvas id="danmuCanvas"></canvas>
+        <div class="resize-handle right"></div>
+        <div class="resize-handle bottom-right"></div>
+    </div>
+
+    <div id="menu">
+        <b>输入弹幕偏移量：</b><input type="text" id="video-offset" value="0">
+        <b style="margin-left: 50px;">弹幕开关：</b><input type="checkbox" id="danmu-switch" checked>
+        <button id="fullscreen" style="margin-left: 120px;background-color: #b3b3b32b;">全屏</button>
+        <br/><br/>
+        <b>上传弹幕文件：  </b><input type="file" id="file-input" style="opacity: 0.85;"><br/><br/>
+        <b>输入视频地址：  </b><input type="text" id="video-url"> <button id="confirm-video-url">确认</button><br/>
+    </div>
+    
+
+</body>
+
+<script src="js/main.js"></script>
+<script>
+    // 创建一个 XMLHttpRequest 对象
+    var xhr = new XMLHttpRequest();
+
+    // 打开一个 HTTP 请求
+    xhr.open("GET", "https://api.bilibili.com/x/player/pagelist?bvid=BV18Z42117pL&jsonp=jsonp");
+
+    // 发送 HTTP 请求
+    xhr.send();
+
+    // 监听 HTTP 请求的响应
+    xhr.onload = function() {
+    // 获取 HTTP 请求的响应数据
+    var data = xhr.responseText;
+
+    // 处理 HTTP 请求的响应数据
+    console.log(data);
+    };
+
+</script>
+
+</html>
