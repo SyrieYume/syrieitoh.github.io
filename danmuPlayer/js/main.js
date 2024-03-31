@@ -1,4 +1,5 @@
 const video = document.querySelector('video')
+const title = document.querySelector('#title')
 const danmuCanvas = document.querySelector('#danmuCanvas')
 const urlInput = document.querySelector('#video-url');
 const videoOffset = document.querySelector('#video-offset');
@@ -23,7 +24,7 @@ const DanmuConfig = {
     opacity: 0.8,     // 弹幕不透明度
     area: 0.65,       // 弹幕显示区域
     shadowBlur: 6,    // 弹幕文字阴影大小
-    disply: true
+    display: true
 }
 
 const VideoConfig = {
@@ -59,11 +60,12 @@ fileInput.addEventListener('change', (event) => {
         const offsetTime = Number(videoOffset.value)
         for(var i=0; i<danmus.length; i++)
             danmus[i].time += offsetTime
+        title.innerHTML = file.name.split(".")[0]
     };
 });
 
 danmuSwitch.addEventListener("change", () => {
-    DanmuConfig.disply = danmuSwitch.checked
+    DanmuConfig.display = danmuSwitch.checked
 })
 
 var danmuIndex = 0
@@ -121,7 +123,7 @@ function updateDanmus(){
 
 function drawDanmus(){
     ctx.clearRect(0, 0, danmuCanvas.width, danmuCanvas.height);
-    if(DanmuConfig.disply)
+    if(DanmuConfig.display)
         displayDanmus.forEach((item) => {
             const color = item.data.color + Math.floor(DanmuConfig.opacity * 255).toString(16)
             ctx.fillStyle = color;
